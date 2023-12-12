@@ -1,0 +1,268 @@
+@font-face {
+    font-family: "Constantine";
+    src: url(../Fonts/Constantine.ttf);
+}
+@font-face
+{
+    font-family: "Montserrat Medium";
+    src: url(../Fonts/15-font.otf);
+}
+
+header
+{
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: -10px;
+    height: 80px;
+    width: 100%;
+    background-color:#32504D;
+    color: #E6A170;
+    font-size: 40px;
+    font-family: "Constantine";
+}
+
+header > img{
+    height: 45px;
+    width: 45px;
+    padding: 10px;
+}
+
+body
+{
+    background-color: #32504D;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+div{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+
+.left-column
+{
+    position: fixed;
+    top:78px;
+    right: calc(75% + 15px);
+    background-color: #0C1110;
+    color:#E6A170;
+    font-size: 18px;
+    font-family: "Constantine";
+    width: calc(25% - 20px);
+    height: 100vh;
+}
+.personal
+{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    background-color:#32504D;
+    color:#F4D5BE;
+    font-size: 24px;
+    border: solid 50px #0C1110;
+    border-right: solid 50px #0C1110;
+    height: 15px;
+}
+
+.personal img
+{
+    position: fixed;
+    left: 15%;
+    width: 6%;
+    height: auto;
+    background-size: cover;
+}
+
+
+.left-column div{
+    padding: 20px;
+    justify-content: center;
+    text-align: center;
+    margin: 0;
+}
+
+a div:hover, .personal ~ div:hover
+{
+    color: white;
+    cursor: pointer;
+}
+
+.black
+{
+    background-color: black;
+}
+
+a{
+    color:#E6A170;
+    text-decoration: none;
+}
+
+
+.center-column
+{
+    position: relative;
+    z-index: -1;
+    display: flex;
+    top: 75px;
+    flex-wrap: wrap;
+    width: calc(50% - 20px);
+    background-color: #F4D5BE;
+    height: auto;
+    border-left: 15px solid;
+    border-right: 15px solid;
+    border-top: 15px solid;
+    border-image: url(../Картинки/рисунок.svg.2023_05_29_20_14_18.0.svg);
+    border-image-outset: 5px;
+    border-image-repeat: repeat;
+    border-image-slice: 9.7% 9.7%;
+}
+
+span{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    padding-bottom: 170px;
+}
+
+span ~ span{
+    padding-left: 20px;
+}
+span > img{
+    width: 355px;
+}
+span > img ~ img{padding-top: 20px;}
+
+.right-column
+{
+    top:78px;
+    left: calc(75% + 15px);
+    position: fixed;
+    width: calc(25% - 15px);
+    height: 100vh;
+    background-color: #0C1110;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.one
+{
+    padding: 40px;
+    width: 75%;
+}
+
+.wheel
+{
+    position: absolute;
+    width: 34%;
+    top: 75px;
+    right: 45%;
+    animation-duration: 1.5s;
+    animation-iteration-count: 1;
+}
+
+@keyframes roll
+{
+    0%
+    {
+        transform: rotate(0deg);
+    }
+    100%
+    {
+        transform: rotate(360deg);
+    }
+}
+
+
+button
+{
+    position: absolute;
+    width: 60%;
+    height: 50px;
+    border-radius: 10px;
+    background-color:#F4D5BE;
+    margin-top: 80px;
+    font-size: 18px;
+    font-family: "Montserrat Medium";
+    color: #32504D;
+}
+
+button:hover{
+    background-color:#E6A170;
+}
+
+.find
+{
+    top: 370px;
+}
+
+.new
+{
+    top: 440px;
+}
+
+button.find:focus ~ .wheel
+{
+    animation-name: roll;
+    animation-timing-function:cubic-bezier(0,0,.58,1)
+}
+
+button:active
+{
+    background-color: #E6A170;
+    width: 195px;
+    height: 45px;
+}
+
+select
+{
+    margin: 20px;
+    width: 80%;
+    height: 50px;
+    color:#F4D5BE;
+    background-color: #0C1110;
+    border:solid#32504D;
+    border-radius: 10px;
+    border-width: 4px;
+    font-size: 18px;
+    font-family: "Montserrat Medium";
+    padding: 10px;
+
+}
+
+footer
+{
+    display: flex;
+    align-items: end;
+    font-family: "Montserrat Medium";
+    top:92vh;
+    position: fixed;
+    margin: -10px;
+    height: 70px;
+    width: 100%;
+    background-color:#32504D;
+    z-index: 1;
+}
+
+footer::before
+{
+    content: '';
+    background-image: url(../Картинки/bottom.svg);
+    width: 900px;
+    height: 150px;
+    position: absolute;
+    background-size: cover;
+    bottom: 15px;
+    left: 307px;
+}
+
+footer > div{
+    padding-bottom: 12px;
+}
+
+footer > div:hover{
+    cursor: pointer;
+}

@@ -1,0 +1,180 @@
+@font-face {
+    font-family: "Constantine";
+    src: url(../Fonts/Constantine.ttf);
+}
+@font-face
+{
+    font-family: "Montserrat Medium";
+    src: url(../Fonts/15-font.otf);
+}
+
+header
+{
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: -10px;
+    height: 80px;
+    width: 100%;
+    background-color:#32504D;
+    color: #E6A170;
+    font-size: 40px;
+    font-family: "Constantine";
+}
+
+header > img{
+    height: 45px;
+    width: 45px;
+    padding: 10px;
+}
+
+body
+{
+    background-color: #32504D;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+div{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.left-column
+{
+    position: fixed;
+    top:78px;
+    right: calc(75% + 15px);
+    background-color: #0C1110;
+    color:#E6A170;
+    font-size: 20px;
+    font-family: "Constantine";
+    width: calc(25% - 20px);
+    height: 100vh;
+}
+
+.left-column div, .right-column div{
+    padding: 20px;
+    justify-content: center;
+    text-align: center;
+    margin: 0;
+}
+
+a div:hover, .personal ~ div:hover, button ~ div:hover, .right-column div:hover
+{
+    color: white;
+    cursor: pointer;
+}
+
+.black
+{
+    background-color: black;
+}
+
+a{
+    color:#E6A170;
+    text-decoration: none;
+}
+
+
+.center-column
+{
+    z-index: -1;
+    display: flex;
+    position: relative;
+    top: 75px;
+    flex-wrap: wrap;
+    width: calc(50% - 20px);
+    background-color: #F4D5BE;
+    height: auto;
+    border-left: 15px solid;
+    border-right: 15px solid;
+    border-top: 15px solid;
+    border-image: url(../Картинки/рисунок.svg.2023_05_29_20_14_18.0.svg);
+    border-image-outset: 5px;
+    border-image-repeat: repeat;
+    border-image-slice: 9.7% 9.7%;
+}
+
+.info
+{
+    width: 800px;
+    height: 200px;
+    background-color: aquamarine;
+}
+
+span{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+span ~ span{
+    padding-left: 20px;
+    padding-bottom: 170px;
+}
+span > img{
+    width: 335px;
+}
+span > img ~ img{padding-top: 20px;}
+
+.right-column
+{
+    position: fixed;
+    background-color: #0C1110;
+    color:#F4D5BE;
+    font-size: 18px;
+    font-family: "Montserrat Medium";
+    top:78px;
+    left: calc(75% + 15px);
+    width: calc(25% - 15px);
+    height: 100vh;
+}
+
+
+
+button.return
+{
+    height: 50px;
+    width: 70%;
+    border-radius: 10px;
+    background-color:#E6A170;
+    border: solid 2px#ffffff;
+    color:#ffffff;
+    font-size: 20px;
+    font-family: "Constantine";
+    margin: 51px;
+}
+
+
+footer
+{
+    display: flex;
+    align-items: end;
+    font-family: "Montserrat Medium";
+    top:92vh;
+    position: fixed;
+    margin: -10px;
+    height: 70px;
+    width: 100%;
+    background-color:#32504D;
+    z-index: 1;
+}
+
+footer::before
+{
+    content: '';
+    background-image: url(../Картинки/bottom.svg);
+    width: 900px;
+    height: 150px;
+    position: absolute;
+    background-size: cover;
+    bottom: 15px;
+    left: 307px;
+}
+
+footer > div{
+    padding-bottom: 12px;
+}
