@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="100mm"
+   height="100mm"
+   viewBox="0 0 100 100"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   sodipodi:docname="колесо веретена.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1.4503086"
+     inkscape:cx="178.92744"
+     inkscape:cy="95.496917"
+     inkscape:window-width="1920"
+     inkscape:window-height="1001"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Слой 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <circle
+       style="fill:none;fill-opacity:0;stroke:#e6a170;stroke-width:4.14798;stroke-dasharray:none;stroke-opacity:1"
+       id="path234"
+       cx="50"
+       cy="50"
+       r="47.92601" />
+    <rect
+       style="fill:#e6a170;fill-opacity:1;stroke:#e6a170;stroke-width:0;stroke-dasharray:none;stroke-opacity:1"
+       id="rect10534"
+       width="4.0322561"
+       height="99.167709"
+       x="47.983871"
+       y="0.55550623"
+       ry="4.21945" />
+    <rect
+       style="fill:#e6a170;fill-opacity:1;stroke:#e6a170;stroke-width:0;stroke-dasharray:none;stroke-opacity:1"
+       id="rect10534-6"
+       width="4.0322561"
+       height="99.167709"
+       x="46.727173"
+       y="-100.1936"
+       ry="4.21945"
+       transform="rotate(89.958483)" />
+    <rect
+       style="fill:#e6a170;fill-opacity:1;stroke:#e6a170;stroke-width:0;stroke-dasharray:none;stroke-opacity:1"
+       id="rect10534-1"
+       width="4.0322561"
+       height="99.167709"
+       x="4.2545929"
+       y="20.631554"
+       ry="4.21945"
+       transform="rotate(-40.360246)" />
+    <rect
+       style="fill:#e6a170;fill-opacity:1;stroke:#e6a170;stroke-width:0;stroke-dasharray:none;stroke-opacity:1"
+       id="rect10534-5"
+       width="4.0322561"
+       height="99.167709"
+       x="68.139923"
+       y="-41.662151"
+       ry="4.21945"
+       transform="rotate(38.824222)" />
+    <circle
+       style="fill:#e6a170;stroke:#e6a170;stroke-width:0"
+       id="path844"
+       cx="50.381756"
+       cy="50.433529"
+       r="12.499999" />
+    <circle
+       style="fill:#ffccaa;stroke:#e6a170;stroke-width:0"
+       id="path900"
+       cx="50.381756"
+       cy="50.433529"
+       r="5.9999995" />
+  </g>
+</svg>

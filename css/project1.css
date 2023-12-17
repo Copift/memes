@@ -10,6 +10,7 @@
 
 header
 {
+    z-index: 100;
     position: fixed;
     display: flex;
     justify-content: center;
@@ -33,8 +34,7 @@ body
 {
     background-color: #32504D;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-around;/*потом убрать*/
 }
 
 div{
@@ -50,7 +50,7 @@ div{
     right: calc(75% + 15px);
     background-color: #0C1110;
     color:#E6A170;
-    font-size: 18px;
+    font-size: 20px;
     font-family: "Constantine";
     width: calc(25% - 20px);
     height: 100vh;
@@ -62,17 +62,17 @@ div{
     align-items: center;
     background-color:#32504D;
     color:#F4D5BE;
-    font-size: 24px;
+    font-size: 18px;
     border: solid 50px #0C1110;
     border-right: solid 50px #0C1110;
-    height: 15px;
+    height: 10px;
 }
 
 .personal img
 {
     position: fixed;
-    left: 15%;
-    width: 6%;
+    left: calc(3% - 20px);
+    width: 60px;
     height: auto;
     background-size: cover;
 }
@@ -105,36 +105,93 @@ a{
 .center-column
 {
     position: relative;
-    z-index: -1;
     display: flex;
     top: 75px;
+    flex-direction: column; 
     flex-wrap: wrap;
     width: calc(50% - 20px);
     background-color: #F4D5BE;
-    height: auto;
     border-left: 15px solid;
     border-right: 15px solid;
     border-top: 15px solid;
-    border-image: url(../Картинки/рисунок.svg.2023_05_29_20_14_18.0.svg);
+    border-image: url(../img/logo.svg.2023_05_29_20_14_18.0.svg);
     border-image-outset: 5px;
     border-image-repeat: repeat;
     border-image-slice: 9.7% 9.7%;
 }
 
-span{
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    padding-bottom: 170px;
+
+.img > img{
+    width: calc(100% + 10px);
 }
 
-span ~ span{
-    padding-left: 20px;
+span > div{
+    column-count: 2;
+    flex-wrap: wrap;
+    margin: -5px;
+    margin-bottom: 20px;
+    padding: 5px;
+    padding-top: 15px;
+    padding-bottom: 10px;
+    background-color: #c7a68e;
 }
-span > img{
-    width: 355px;
+
+input[type="checkbox"] {
+    opacity: 0;
+  }
+
+div > .label_scattering{
+    position:absolute;
+    width: 100px;
+    height: 100px;
+    transform: translate(-50%, -50%);
+    background: url(http://zornet.ru/ABVUN/Aba/detunis/supasnab/heart.png) no-repeat;
+    background-position: 0 0;
+  }
+  .label_scattering:hover{
+    cursor: pointer;
+  }
+
+
+input[type="checkbox"]:checked ~ .label_scattering{
+    background-position: -2800px 0;
+    transition: background 1s steps(28);
+    animation: fave-heart 1s steps(28);
+  }
+
+  @keyframes fave-heart {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: -2800px 0;
+    }
+  }
+
+p
+{
+    font-family: "Montserrat Medium";
+    font-size: 18px;
+    margin-right: 10px;
+    color: white;
+    padding-bottom: 20px;
 }
-span > img ~ img{padding-top: 20px;}
+
+.right-column
+{
+    color:#E6A170;
+    font-size: 18px;
+    font-family: "Constantine";
+    top:78px;
+    left: calc(75% + 15px);
+    position: fixed;
+    width: calc(25% - 15px);
+    height: 100vh;
+    background-color: #0C1110;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 .right-column
 {
@@ -180,13 +237,13 @@ span > img ~ img{padding-top: 20px;}
 button
 {
     position: absolute;
-    width: 60%;
+    width: 100%;
     height: 50px;
     border-radius: 10px;
     background-color:#F4D5BE;
     margin-top: 80px;
-    font-size: 18px;
-    font-family: "Montserrat Medium";
+    font-size: 20px;
+    font-family: "Constantine";
     color: #32504D;
 }
 
@@ -194,13 +251,17 @@ button:hover{
     background-color:#E6A170;
 }
 
-.find
+.button_container
 {
+    position: absolute;
+    width: 60%;
+    height: 50px;
     top: 370px;
 }
 
 .new
 {
+    width: 60%;
     top: 440px;
 }
 
@@ -233,6 +294,7 @@ select
 
 }
 
+
 footer
 {
     display: flex;
@@ -247,16 +309,13 @@ footer
     z-index: 1;
 }
 
-footer::before
+footer > img
 {
-    content: '';
-    background-image: url(../Картинки/bottom.svg);
-    width: 900px;
-    height: 150px;
-    position: absolute;
+    position: fixed;
+    left: 20%;
+    height: auto;
     background-size: cover;
-    bottom: 15px;
-    left: 307px;
+    width: 60%;
 }
 
 footer > div{

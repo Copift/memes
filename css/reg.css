@@ -1,0 +1,74 @@
+@font-face {
+  font-family: "Constantine";
+  src: url(../Fonts/Constantine.ttf);
+}
+@font-face
+{
+  font-family: "Montserrat Medium";
+  src: url(../Fonts/15-font.otf);
+}
+
+
+.text {
+  border: 2px solid #E6A170;
+  height: 2.3em;
+  width: 95%;
+  background-color: #F4D5BE;
+  border-radius: 2em;
+}
+
+.text:focus {
+  border: 3px solid #F4D5BE;
+  background-color: white;
+}
+textarea.text {
+  height: 20em;
+  padding: 1em;
+}
+
+
+h1 {
+  font-family: "Constantine";
+  font-weight: normal;
+  color: #E6A170;
+  text-align: center;
+}
+
+body {
+  background-color: #32504D;
+  font-family: "Montserrat Medium";
+  font-size: 16pt;
+  margin: 0;
+}
+
+table {
+  color: #ffffff;
+  padding: 20px;
+}
+
+td {
+  padding: 20px;
+}
+.volume {
+  height: 2px;
+  width: 20em;
+}
+.submit {
+  margin-left: 50%;
+}
+
+button.return
+{
+    height: 50px;
+    width: 300px;
+    border-radius: 10px;
+    background-color:#E6A170;
+    border: solid 2px#ffffff;
+    color:#ffffff;
+    font-size: 20px;
+    font-family: "Constantine";
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 40px;
+}
+

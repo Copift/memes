@@ -8,34 +8,24 @@
     <title>Не-спица</title>
 </head>
 <header>Не-спица
-    <img src="../Картинки/спицы пнг.png" />
+    <img src="../img/spitsi.png" />
 </header>
 <body>
     <div class="left-column">
         <button onclick="document.location='./project1.html'" class="return">Вернуться на главную</button>
-        <div class = "black">Мой блог</div>
-        <div>Комментарии</div>
-        <div class = "black">Добавить фандом</div>
+        <div class = "black">Комментарии</div>
         <div>Подписки</div>
         <div class = "black">Сохраненное</div>
         <div>Частые вопросы</div>
-        <div class = "black">Обучение</div>
     </div>
-    <div class="center-column">
-        <span><img src="../Картинки/p1.jpg">
-        <img src="../Картинки/p2.jpg">
-        <img src="../Картинки/p3.jpg">
-    </span>
-    <span>
-        <img src="../Картинки/p4.jpg">
+        <!-- Часть, куда будут добавляться посты -->
+        <div class="center-column">
+            <span id="posts_line">
 
-        <img src="../Картинки/p5.jpg">
 
-        <img src="../Картинки/p6.jpg">
 
-        <img src="../Картинки/p7.jpg">
 
-    </span>
+            </span>
     </div>
     <div class="right-column">
         <div class="black">Мои читатели</div>
@@ -43,11 +33,105 @@
         <div class="black">Статистика</div>
         <div>Изменить профиль</div>
         <div class="black">Выйти</div>
+                <!-- кнопка добавления постов-->
+                <div class="button_container">
+                    <button onclick="takeUserPosts()"> Показать ещё посты </button>
+                </div>
     </div>
 </body>
 <footer>
+    <img src="../img/bottom.svg">
     <div>Политика конфиденциальности</div>
     <div>Пользовательское соглашение</div>
     <div>CC-BY</div>
 </footer>
+
+
+    <script>
+        // ip сервера
+        const ip = '10.8.0.1:5000';
+
+        // персональный id сессии
+        var uuid = '4796de3a-7ed3-4552-a8a7-5465a2f5f364';  // ДОЛЖЕН ПОЛУЧАТЬСЯ ПРИ АВТОРИЗАЦИИ
+
+        // количество постов в ленте
+        var PostCount = 0;
+
+        // сколько постов загружается за раз
+        var step = 5;
+
+        // старт скрипта после загрузке окна
+        window.onload=startPostsLine;
+
+        // функция запускающаяся после загрузки окна
+        function startPostsLine(){
+            // получаем посты из БД и добавляем их в ленту
+            takeUserPosts();
+
+            // http://10.8.0.1:5000/auth?login=gigo&password=helloWorld123
+
+            // http://10.8.0.1:5000/auth?login=tyrbo&password=turboIsTheBestPerson
+
+            // персональный id сессии
+            //let uuid = '9333db1c-d724-4b40-8a7b-dbdfd0dfd355';  // ДОЛЖЕН ПОЛУЧАТЬСЯ ПРИ РЕГИСТРАЦИИ
+            //let uuid = '3c0f5804-16b3-4954-bb7b-f6ad8a83ad6e';  // ДОЛЖЕН ПОЛУЧАТЬСЯ ПРИ РЕГИСТРАЦИИ
+        }
+
+
+        // отправляет запрос в БД и принимает его
+        function takeUserPosts(count = step){
+            // создаём запрос
+            let url = 'http://' + ip + '/getPostsGroupUser?uuid=' + uuid + '&post_id=' + PostCount + '&count=' + count;
+
+            // принимаем и обрабатываем данные запроса
+            fetch(url)
+              .then(response => response.json())    // преобразовавем запрос в json
+              .then(commits => addPosts(commits));  // передаем json в функцию создания поста
+
+        }
+
+              // добавляем посты в ленту
+        function addPosts(commits, lastPost = 0){
+
+            // проверка на превышение кол-ва постов (СДЕЛАТЬ АДАПТИВНОЙ)
+            if (lastPost < commits.posts.length){
+                let line = document.getElementById("posts_line");
+
+                // добавляем пост в html
+                line.insertAdjacentHTML('beforeend',
+                                    '<div>'+
+                                    '<div class = "img" id = "' + (PostCount + lastPost) +'_img"></div>' +   // вставка контейнера (для будущей картинки)
+                                    '<p>' + commits.posts[lastPost].post.Text + '</p>'+      // встака подписи
+                                    '</div>'
+                                   );
+
+                // создаем пустую картинку
+                var img = new Image();
+
+                // МЕДЛЕННЫЙ И КРАСЫВЫЙ СПОСОБ СОЗДАТЬ ЛЕНТУ
+                // когда картинка загружена, начинаем загрузку другой
+                img.onload = function(){
+                    addPosts(commits, lastPost+1);
+                };
+
+
+                // добавляем картинке ссылку на изображение
+                img.src = '' + commits.posts[lastPost].post.image_link + '';
+
+                // здесь добавляем готовую картинку в html
+                document.getElementById((PostCount + lastPost) +'_img').appendChild(img);
+
+
+                // БЫСТРЫЙ НО НЕ КРАСИВЫЙ СПОСОБ СОЗДАТЬ ЛЕНТУ
+                //addPosts(commits, lastPost+1);
+
+
+                // запоминаем id последнего поста в ленте
+                if (lastPost + 1 == commits.posts.length){
+                    PostCount += step;
+                }
+            }
+        }
+
+    </script>
 </html>

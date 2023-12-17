@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Форма регистрации</title>
+    <link href="./../css/reg.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <h1>
+      Рады вас видеть!
+    </h1>
+    <hr />
+    <form action="" method="post">
+      <table align="center">
+        <tr>
+          <td>
+            <fieldset>
+              <legend align="right"><label for="username">Имя пользователя</label></legend>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                class="text"
+                required
+                placeholder="  Проявите фантазию"
+                size="27"
+              />
+            </fieldset>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <fieldset>
+              <legend align="right">
+                <label for="adress">Адрес электронной почты</label>
+              </legend>
+              <input
+                id="adress"
+                name="email"
+                type="text"
+                class="text"placeholder="  Поздравим с Днём Рождения"
+                required
+                size="27"
+              />
+            </fieldset>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <fieldset>
+              <legend align="right">
+                <label for="phone">Номер телефона</label>
+              </legend>
+              <input
+              id="phone"
+              name="phone"
+              type="text"
+              class="text"
+              size="27"
+              placeholder="  Запасной вариант авторизации"
+              />
+            </fieldset>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <fieldset>
+              <legend align="right">
+                <label for="pass">Придумайте пароль</label>
+              </legend>
+              <input
+              id="pass"
+              type="password"
+              required
+              maxlength="15"
+              size="27"
+              name="password"
+              class = "text"
+              placeholder="  Хорошо подумайте"
+            />
+            </fieldset>
+          </td>
+        </tr>
+      </tr>
+      <tr>
+        <td>
+          <fieldset>
+            <legend align="right">
+              <label for="pass2">Повторите пароль</label>
+            </legend>
+            <input
+              id="pass2"
+              type="password"
+              maxlength="15"
+              size="27"
+              name="password"
+              class = "text"
+              placeholder="  Повторение - мать учения"
+            />
+          </fieldset>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <fieldset>
+            <legend align="right">
+              <label for="bdatw">Дата Рождения</label>
+            </legend>
+            <input id="bdate" type="date" name="calendar" class  = "text" />
+          </fieldset>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <fieldset>
+            <legend align="right">
+              <label for="pass2">Желаете получать рассылку с новостями проекта?</label>
+            </legend>
+            <input id="spam" type="checkbox" class="text" name="a" checked />
+          </fieldset>
+        </td>
+      </tr>
+      </table>
+    </form>
+    <button onclick="document.location='./avt.html'" class="return">Зарегистрироваться</button>
+  </body>
+</html>

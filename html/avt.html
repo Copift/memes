@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Авторизация</title>
+    <link href="./../css/reg.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <h1>
+      Авторизация
+    </h1>
+    <hr />
+    <form action="" method="post">
+      <table align="center">
+        <tr>
+          <td>
+            <fieldset>
+              <legend align="right"><label for="username">Имя пользователя или почта</label></legend>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                class="text"
+                required
+                size="27"
+              />
+            </fieldset>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <fieldset>
+              <legend align="right">
+                <label for="pass">Пароль</label>
+              </legend>
+              <input
+              id="pass"
+              type="password"
+              required
+              maxlength="15"
+              size="27"
+              name="password"
+              class = "text"
+            />
+            </fieldset>
+          </td>
+        </tr>
+      </tr>
+      </table>
+    </form>
+    <button onclick="document.location='./project1.html'" class="return">Войти</button>
+  </body>
+</html>

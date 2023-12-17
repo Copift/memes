@@ -8,66 +8,75 @@
     <title>Не-спица</title>
 </head>
 <header>Не-спица
-    <img src="../img/spitsi.png" />
+    <img src="../Картинки/спицы пнг.png" />
 </header>
 <body>
     <div class="left-column">
         <div class = "personal">User-1
-            <img src="../img/icon.svg">
+            <img src="../Картинки/icon.svg">
         </div>
         <a href="./blog.html"> <div class = "black">Мой блог</div></a>
         <div>Комментарии</div>
-        <div class = "black">Подписки</div>
-        <div>Сохраненное</div>
-        <div class = "black">Частые вопросы</div>
+        <div class = "black">Добавить фандом</div>
+        <div>Подписки</div>
+        <div class = "black">Сохраненное</div>
+        <div>Частые вопросы</div>
+        <div class = "black">Обучение</div>
     </div>
 
-    <!-- Часть, куда будут добавляться посты -->
-    <div class="center-column">
-        <span id="posts_line">
 
 
-        </span>
+        <!-- Часть, куда будут добавляться посты -->
+        <div class="center-column">
+            <span id="posts_line">
 
-    </div>
+
+
+
+            </span>
+
+            <!-- кнопка добавления постов-->
+            <div class="button_container">
+                <button onclick="takePosts()"> Посмотреть ещё </button>
+            </div>
+        </div>
+
+
+
+
+
 
 
     <div class="right-column">
-        <!-- кнопка добавления постов-->
-        <div class="button_container">
-            <button onclick="takePosts()"> Ищем! </button>
-        </div>
-        <img class = "one" src="../img/vereteno.svg">
-        <img class = "wheel" src="../img/wheel.svg">
+        <button class = "find">Ищем!</button>
+        <img class = "one" src="../Картинки/веретено.svg">
+        <img class = "wheel" src="../Картинки/колесо веретена.svg">
             <select>
-                <option>#ФБКИ</option>
-                <option>#Программирование</option>
-                <option>#Лебедев</option>
-                <option>#Петрушин</option>
+                <option>Гарри Поттер</option>
+                <option>BTS</option>
+                <option>Ведьмак</option>
+                <option>"Моцарт" рок-опера</option>
               </select>
 
-        <button class = "new" onclick="document.location='./new_post.html'">Новый пост</button>
+        <button class = "new">Создать</button>
     </div>
 </body>
+<!--
 <footer>
-    <img src = "../img/bottom.svg">
     <div>Политика конфиденциальности</div>
     <div>Пользовательское соглашение</div>
     <div>CC-BY</div>
 </footer>
-
+-->
     <script>
         // ip сервера
         const ip = '10.8.0.1:5000';
 
         // персональный id сессии
-        var uuid = '4796de3a-7ed3-4552-a8a7-5465a2f5f364';  // ДОЛЖЕН ПОЛУЧАТЬСЯ ПРИ АВТОРИЗАЦИИ
+        var uuid = '39c41ef6-47b6-46b9-9e2f-3f5ab8f48261';  // ДОЛЖЕН ПОЛУЧАТЬСЯ ПРИ АВТОРИЗАЦИИ
 
         // количество постов в ленте
         var PostCount = 0;
-
-        // сколько постов загружается за раз
-        var step = 10;
 
         // старт скрипта после загрузке окна
         window.onload=startPostsLine;
@@ -121,7 +130,7 @@
 
 
         // отправляет запрос в БД и принимает его
-        function takePosts(count = step){
+        function takePosts(count = 20){
             // создаём запрос
             let url = 'http://' + ip + '/getPostsGroup?uuid=' + uuid + '&post_id=' + PostCount + '&count=' + count;
 
@@ -170,11 +179,10 @@
 
                 // запоминаем id последнего поста в ленте
                 if (lastPost + 1 == commits.posts.length){
-                    PostCount += step;
+                    PostCount += 20;
                 }
             }
         }
 
     </script>
-
 </html>
