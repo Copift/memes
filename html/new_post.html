@@ -94,7 +94,6 @@
                 var text = inputText.value;
                 var file = inputFile.files[0];
 
-                //'http://' + ip + '/uploadPost'
 
                 const data = new FormData();
                 data.append("uuid", uuid);
@@ -107,7 +106,7 @@
                   body: data
                 })
 
-                // если прищёл правильный лответ
+                // если прищёл правильный ответ
                 if (response.ok){
                     toggle = true;
                     console.log("пост создан");
@@ -116,18 +115,6 @@
                     console.log("ошибка в создании поста");
                 }
 
-
-                /*
-                fetch('http://' + ip + '/uploadPost', {
-                  method: 'POST',
-                  body: data
-                })
-                // когда запрос отправился, включаем переключатель (даем возможность слать запросы)
-                    .then(function(){
-                    toggle = true;
-                    console.log("запрос отправлен");
-                })
-*/
             }else{
                 alert("подождите, предидущий запрос ещё не отправился");
             }
