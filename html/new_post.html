@@ -57,7 +57,7 @@
                   </tr>
                 </table>
               </form>
-              <button onclick="document.location='./project1.html'" class="return">Опубликовать</button>
+              <button onclick="sendPost()" class="return">Опубликовать</button>
         </div>
     </body>
     <footer>
@@ -66,4 +66,74 @@
         <div>CC-BY</div>
     </footer>
 </body>
+    <script>
+        // ip сервера
+        const ip = '10.8.0.2:5000';
+
+        // персональный id сессии
+        //var uuid = localStorage.getItem('UUID');
+        var uuid = '0ee09b12-af98-49ad-a3dc-9b8cbc186ad5';  // ДОЛЖЕН ПОЛУЧАТЬСЯ ПРИ АВТОРИЗАЦИИ
+
+        // переключатель, для ограничения нажатия на кнопку
+        var toggle = true;
+
+        // фунция отправки поста в базу данных
+        async function sendPost(){
+            // проверяем переключатель
+            if (toggle){
+                console.log("отправка запроса");
+
+                // отключаем возможность отылать пост
+                toggle = false;
+
+                // берём inpyt содержащий текст
+                var inputText = document.querySelector('input[type="text"]');
+                // берём inpyt содержащий файл
+                var inputFile = document.querySelector('input[type="file"]');
+
+                var text = inputText.value;
+                var file = inputFile.files[0];
+
+                //'http://' + ip + '/uploadPost'
+
+                const data = new FormData();
+                data.append("uuid", uuid);
+                data.append("text", text);
+                data.append("files", file);
+
+                // оптправляем запрос
+                let response = await fetch('http://' + ip + '/uploadPost', {
+                  method: 'POST',
+                  body: data
+                })
+
+                // если прищёл правильный лответ
+                if (response.ok){
+                    toggle = true;
+                    console.log("пост создан");
+                }else{
+                    toggle = true;
+                    console.log("ошибка в создании поста");
+                }
+
+
+                /*
+                fetch('http://' + ip + '/uploadPost', {
+                  method: 'POST',
+                  body: data
+                })
+                // когда запрос отправился, включаем переключатель (даем возможность слать запросы)
+                    .then(function(){
+                    toggle = true;
+                    console.log("запрос отправлен");
+                })
+*/
+            }else{
+                alert("подождите, предидущий запрос ещё не отправился");
+            }
+        }
+
+
+    </script>
+
 </html>

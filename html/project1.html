@@ -61,7 +61,8 @@
         const ip = '10.8.0.1:5000';
 
         // персональный id сессии
-        var uuid = '4796de3a-7ed3-4552-a8a7-5465a2f5f364';  // ДОЛЖЕН ПОЛУЧАТЬСЯ ПРИ АВТОРИЗАЦИИ
+        //var uuid = localStorage.getItem('UUID');
+        var uuid = '0ee09b12-af98-49ad-a3dc-9b8cbc186ad5';  // ДОЛЖЕН ПОЛУЧАТЬСЯ ПРИ АВТОРИЗАЦИИ
 
         // количество постов в ленте
         var PostCount = 0;
@@ -77,46 +78,6 @@
         function startPostsLine(){
             // получаем посты из БД и добавляем их в ленту
             takePosts();
-
-
-            // ДАННЫЕ ДЛЯ РЕГИСТРАЦИИ (ПОТОМ УДАЛИТЬ)
-            //let login = "gigo";
-            //let password = "helloWorld123";
-
-            // фукция
-            //authorization(login, password);  // СДЕЛАТЬ ЗАПУСК ПО КНОПКЕ
-
-            // ТАК МОЖНО ПОЛУЧАТЬ UUID БЕЗ АВТОРИЗАЦИИ, ЧТОБЫ ТЕСТИТЬ ЛЕНТУ
-            // http://10.8.0.1:5000/auth?login=gigo&password=helloWorld123
-        }
-
-        // получение uuid (КОД ДЛЯ РЕГИСТРАЦИИ, ПОТОМ УДАЛИТЬ)
-        async function authorization(login, password){
-            // создаём запрос
-            let url = 'http://' + ip + '/auth?login=' + login + '&password=' + password;
-
-            // оптправляем запрос
-            let response = await fetch(url);
-
-            // если прищёл правильный лответ
-            if (response.ok){
-                // преобразовываем запрос в json
-                let commits = await response.json();
-
-                // достаем uuid из json
-                let uuid = commits.uuid;
-
-                // возвращаем готовый uuid
-                console.log(uuid);  // ЗАМЕНИТЬ НА ПЕРЕХОД К ОСНОВНОЙ СТРАНИЦЕ С ПЕРЕДАЧЕЙ UUID
-
-            // если пришёл ответ с ошибкой
-            }else{
-                // преобразовываем запрос в json
-                let commits = await response.json();
-
-                // выводим сообщение об ошибке
-                alert("error " + commits.err_code + "\n" + commits.err);
-            }
         }
 
 
@@ -139,23 +100,34 @@
             if (lastPost < commits.posts.length){
                 let line = document.getElementById("posts_line");
 
+                //console.log(commits);
+
                 // добавляем пост в html
                 line.insertAdjacentHTML('beforeend',
-                                    '<div>'+
-                                    '<div class = "img" id = "' + (PostCount + lastPost) +'_img"></div>' +   // вставка контейнера (для будущей картинки)
-                                    '<p>' + commits.posts[lastPost].post.Text + '</p>'+      // встака подписи
-                                    '</div>'
-                                   );
+                                '<div>'+
+                                '<div class = "img" id = "' + (PostCount + lastPost) +'_img"></div>' +
+                                '<p>' + commits.posts[lastPost].post.Text + '</p>' +
+                                '<div class = "reaction" >' +
+                                '<p id="' + commits.posts[lastPost].post.id + '_like" >' +
+                                commits.posts[lastPost].post.likes + '</p>' +
+                                '<input onclick="useLike(this)" name="scattering" ' +
+                                'value="' + commits.posts[lastPost].post.id + '" ' +
+                                'id="' + (PostCount + lastPost) + '" ' +
+                                'type="checkbox" ' + checkLike(commits.posts[lastPost].post.is_liked) + ' />' +
+                                '<label for="' + (PostCount + lastPost) + '" ' +
+                                'class="label_scattering"></label>'+
+                                '</div>' +
+                                '</div>'
+                               );
 
                 // создаем пустую картинку
                 var img = new Image();
 
-                // МЕДЛЕННЫЙ И КРАСЫВЫЙ СПОСОБ СОЗДАТЬ ЛЕНТУ
+                // МЕДЛЕННЫЙ И КРАСИВЫЙ СПОСОБ СОЗДАТЬ ЛЕНТУ
                 // когда картинка загружена, начинаем загрузку другой
-                img.onload = function(){
-                    addPosts(commits, lastPost+1);
-                };
-
+                //img.onload = function(){
+                //    addPosts(commits, lastPost+1);
+                //};
 
                 // добавляем картинке ссылку на изображение
                 img.src = '' + commits.posts[lastPost].post.image_link + '';
@@ -165,7 +137,7 @@
 
 
                 // БЫСТРЫЙ НО НЕ КРАСИВЫЙ СПОСОБ СОЗДАТЬ ЛЕНТУ
-                //addPosts(commits, lastPost+1);
+                addPosts(commits, lastPost+1);
 
 
                 // запоминаем id последнего поста в ленте
@@ -173,6 +145,41 @@
                     PostCount += step;
                 }
             }
+        }
+
+
+        // проверяем стоит ли лайк у данного поста
+        function checkLike(isLiked){
+            if (isLiked){
+                return 'checked';
+            }else{
+                return '';
+            }
+        }
+
+
+        // отправка запроса при нажатии лайка
+        function useLike(elem){
+            //console.log(elem.checked);
+            if (elem.checked){
+                // если поставили лайк
+                let url = 'http://' + ip + '/setLike?uuid=' + uuid + '&post_id=' + elem.value;
+                fetch(url)
+                    .then(changLikeValue(elem.value, 1));
+            }else{
+                // если убрали лайк
+                let url = 'http://' + ip + '/downLike?uuid=' + uuid + '&post_id=' + elem.value;
+                fetch(url)
+                    .then(changLikeValue(elem.value, -1));
+            }
+        }
+
+        //id="' + commits.posts[lastPost].post.id + '_like"
+
+        function changLikeValue(post_id, x){
+            let like = document.getElementById('' + post_id + '_like');
+            let val = Number(like.innerText) + x;
+            like.innerText = val;
         }
 
     </script>
