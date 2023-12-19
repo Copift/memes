@@ -49,11 +49,11 @@
 
     <script>
         // ip сервера
-        const ip = '10.8.0.2:5000';
+        const ip = '10.8.0.1:5000';
 
         // персональный id сессии
-        //var uuid = localStorage.getItem('UUID');
-        var uuid = '0ee09b12-af98-49ad-a3dc-9b8cbc186ad5';  // ДОЛЖЕН ПОЛУЧАТЬСЯ ПРИ АВТОРИЗАЦИИ
+        var uuid = localStorage.getItem('UUID');
+        //var uuid = '0ee09b12-af98-49ad-a3dc-9b8cbc186ad5';  // ДОЛЖЕН ПОЛУЧАТЬСЯ ПРИ АВТОРИЗАЦИИ
 
         // количество постов в ленте
         var PostCount = 0;
@@ -67,13 +67,18 @@
 
         // функция запускающаяся после загрузки окна
         function startPostsLine(){
-            // получаем посты из БД и добавляем их в ленту
-            takeUserPosts();
+            // проверякм у пользователя наличее uuid
+            if (uuid){
+                // получаем посты из БД и добавляем их в ленту
+                takeUserDeletedPosts();
+            }else{
+                //  если у пользователя нет uuid пересылаем его к авторизации
+                window.location.replace("avt.html");
+            }
         }
 
-
         // отправляет запрос в БД и принимает его
-        function takeUserPosts(count = step){
+        function takeUserDeletedPosts(count = step){
             // создаём запрос
             let url = 'http://' + ip + '/getDeletedPostsGroupUser?uuid=' + uuid + '&post_id=' + PostCount + '&count=' + count;
 

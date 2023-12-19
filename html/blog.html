@@ -49,11 +49,11 @@
 
     <script>
         // ip сервера
-        const ip = '10.8.0.2:5000';
+        const ip = '10.8.0.1:5000';
 
         // персональный id сессии
-        //var uuid = localStorage.getItem('UUID');
-        var uuid = '0ee09b12-af98-49ad-a3dc-9b8cbc186ad5';  // ДОЛЖЕН ПОЛУЧАТЬСЯ ПРИ АВТОРИЗАЦИИ
+        var uuid = localStorage.getItem('UUID');
+        //var uuid = '0ee09b12-af98-49ad-a3dc-9b8cbc186ad5';  // ДОЛЖЕН ПОЛУЧАТЬСЯ ПРИ АВТОРИЗАЦИИ
 
         // количество постов в ленте
         var PostCount = 0;
@@ -67,8 +67,14 @@
 
         // функция запускающаяся после загрузки окна
         function startPostsLine(){
-            // получаем посты из БД и добавляем их в ленту
-            takeUserPosts();
+            // проверякм у пользователя наличее uuid
+            if (uuid){
+                // получаем посты из БД и добавляем их в ленту
+                takeUserPosts();
+            }else{
+                //  если у пользователя нет uuid пересылаем его к авторизации
+                window.location.replace("avt.html");
+            }
         }
 
 
@@ -94,11 +100,25 @@
                 // добавляем пост в html
                 line.insertAdjacentHTML('beforeend',
                                 '<div>'+
+                                // картинка поста
                                 '<div class = "img" id = "' + (PostCount + lastPost) +'_img"></div>' +
+
+                                // данные пользователя
+                                '<div>' +
+                                // имя пользователя
+                                '<p>' + '</p>' +
+                                // аватар пользователя
+                                '<div class = "avatar" id = "' + (PostCount + lastPost) +'_avatar"></div>' +
+                                '</div>' +
+
+                                // част поста содержащая текст
+                                // текст поста
                                 '<p>' + commits.posts[lastPost].post.Text + '</p>' +
                                 '<div class = "reaction" >' +
+                                // счётчик лайков
                                 '<p id="' + commits.posts[lastPost].post.id + '_like" >' +
                                 commits.posts[lastPost].post.likes + '</p>' +
+                                // кнопка лайка
                                 '<input onclick="useLike(this)" name="scattering" ' +
                                 'value="' + commits.posts[lastPost].post.id + '" ' +
                                 'id="' + (PostCount + lastPost) + '" ' +
@@ -106,10 +126,18 @@
                                 '<label for="' + (PostCount + lastPost) + '" ' +
                                 'class="label_scattering"></label>'+
                                 '</div>' +
+
+                                // часть поста связанная с управлением своими постами
+                                // кнопка изменения поста
+                                '<button onclick="changePost(this)" '+
+                                'value="' + commits.posts[lastPost].post.id + '" ' +
+                                'id="' + (PostCount + lastPost) + '" ' +
+                                '> изменить пост </button>' +
+                                // кнопка удаления поста
                                 '<button onclick="deletePost(this)" '+
                                 'value="' + commits.posts[lastPost].post.id + '" ' +
                                 'id="' + (PostCount + lastPost) + '" ' +
-                                '> удаление!!! </button>' +
+                                '> удалить пост </button>' +
                                 '</div>'
                                );
 
@@ -167,6 +195,12 @@
             let like = document.getElementById('' + post_id + '_like');
             let val = Number(like.innerText) + x;
             like.innerText = val;
+        }
+
+
+        // функция изменения поста из общей ленты
+        function changePost(elem){
+            console.log("попытка изменения поста" + elem.value);
         }
 
 
