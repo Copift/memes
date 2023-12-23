@@ -198,9 +198,13 @@
         }
 
 
-        // функция изменения поста из общей ленты
+        // функция изменения поста
         function changePost(elem){
-            console.log("попытка изменения поста" + elem.value);
+            // запоминаем id изменяемого поста
+            localStorage.setItem('changePost_id', elem.value);
+
+            // переходим на страницу редактиронания
+            window.location.replace("change_post.html");
         }
 
 

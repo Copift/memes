@@ -58,11 +58,14 @@
 
     <script>
         // ip сервера
-        const ip = '10.8.0.1:5000';
+        const ip = '10.8.0.2:5000';
 
         // персональный id сессии
         var uuid = localStorage.getItem('UUID');
         //var uuid = '0ee09b12-af98-49ad-a3dc-9b8cbc186ad5';  // ДОЛЖЕН ПОЛУЧАТЬСЯ ПРИ АВТОРИЗАЦИИ
+
+        // является ли пользователь админом
+        var is_admin = localStorage.getItem('IS_ADMIN');
 
         // количество постов в ленте
         var PostCount = 0;
@@ -134,6 +137,13 @@
                                 '<label for="' + (PostCount + lastPost) + '" ' +
                                 'class="label_scattering"></label>'+
                                 '</div>' +
+
+                                // часть для модерации ленты постов (есть только у модератора)
+                                '<div class = "moderators_part">' +
+                                moderatPart((PostCount + lastPost), // номер поста
+                                            commits.posts[lastPost].user.user_id, // id пользователя
+                                            commits.posts[lastPost].post.id) + // id поста
+                                '</div>' +
                                 '</div>'
                                );
 
@@ -185,12 +195,69 @@
             }
         }
 
+
         // функция изменения значения лайка
         function changLikeValue(post_id, x){
             let like = document.getElementById('' + post_id + '_like');
             let val = Number(like.innerText) + x;
             like.innerText = val;
         }
+
+        // функция для создания модераторской части
+        function moderatPart(num, user_id, post_id){
+            if (is_admin){
+                return         ( // кнопка бана пользователя
+                                '<button onclick="UserBan(this)" '+
+                                'value="' + user_id + '" ' +
+                                'id="' + num + '" ' +
+                                '> бан пользователя </button>' +
+                                // кнопка бана поста
+                                '<button onclick="PostBan(this)" '+
+                                'value="' + post_id + '" ' +
+                                'id="' + num + '" ' +
+                                '> бан поста </button>');
+            }else{
+                return '';
+            }
+        }
+
+
+        // функция бана пользователя
+        async function UserBan(elem){
+            console.log("попытка бана пользователя " + elem.value);
+
+            // оптправляем запрос
+            let response = await fetch('http://' + ip + '/setBan?uuid=' + uuid + '&user_id=' + elem.value);
+
+            // если прищёл правильный ответ
+            if (response.ok){
+                toggle = true;
+                console.log("пользователь забанен");
+            }else{
+                toggle = true;
+                console.log("ошибка в бане пользователя");
+            }
+        }
+
+
+        // функция бана поста
+        async function PostBan(elem){
+            console.log("попытка бана поста " + elem.value);
+
+            // оптправляем запрос
+            let response = await fetch('http://' + ip + '/setBanPost?uuid=' + uuid + '&post_id=' + elem.value);
+
+            // если прищёл правильный ответ
+            if (response.ok){
+                toggle = true;
+                console.log("пост забанен");
+            }else{
+                toggle = true;
+                console.log("ошибка в бане поста");
+            }
+        }
+
+
 
     </script>
 </html>

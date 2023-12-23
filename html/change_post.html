@@ -45,19 +45,21 @@
                     <td>
                       <fieldset>
                         <legend align="right"><label for="image">Добавьте картинку</label></legend>
+                        <div> <img id = "postImage"> </div>
                         <input
                           id="image"
                           name="f"
                           type="file"
                           required
                           size="27"
+                          onChange= resetImg(this)
                         />
                       </fieldset>
                     </td>
                   </tr>
                 </table>
               </form>
-              <button onclick="sendPost()" class="return">Опубликовать</button>
+              <button onclick="sendChangedPost()" class="return">Заменить</button>
         </div>
     </body>
     <footer>
@@ -68,27 +70,55 @@
 </body>
     <script>
         // ip сервера
-        const ip = '10.8.0.1:5000';
+        const ip = '10.8.0.2:5000';
 
         // персональный id сессии
         var uuid = localStorage.getItem('UUID');
-        //var uuid = '0ee09b12-af98-49ad-a3dc-9b8cbc186ad5';  // ДОЛЖЕН ПОЛУЧАТЬСЯ ПРИ АВТОРИЗАЦИИ
+
+        // id поста который ма будем редактировать
+        var  changePost_id = localStorage.getItem('changePost_id');
 
         // переключатель, для ограничения нажатия на кнопку
         var toggle = true;
 
+        // старт скрипта после загрузке окна
+        window.onload=startPostChange;
+
         // функция запускающаяся после загрузки окна
-        function startPostsLine(){
+        function startPostChange(){
             // проверякм у пользователя наличее uuid
             if (!uuid){
-                //  если у пользователя нет uuid пересылаем его к авторизации
+                // если у пользователя нет uuid пересылаем его к авторизации
                 window.location.replace("avt.html");
             }
+            if (!changePost_id){
+                // если у пользователя нет changePost_id пересылаем его к блогу
+                window.location.replace("blog.html");
+            }
+
+
+            // Загружаем данные старого поста
+            // создаём запрос
+            let url = 'http://' + ip + '/post/' + changePost_id + '?uuid=' + uuid;
+
+            // принимаем и обрабатываем данные запроса
+            fetch(url)
+              .then(response => response.json())    // преобразовавем запрос в json
+              .then(commits => addInfo(commits));  // передаем json в функцию создания поста
+        }
+
+        // добавить данные поста в редактор
+        function addInfo(commits){
+            //console.log(commits);
+            document.getElementById("comment").setAttribute("value", commits.text);
+            document.getElementById("postImage").setAttribute("src", commits.image_link);
+
+
         }
 
 
-        // фунция отправки поста в базу данных
-        async function sendPost(){
+        // фунция отправки изменённого поста в базу данных
+        async function sendChangedPost(){
             // проверяем переключатель
             if (toggle){
                 console.log("отправка запроса");
@@ -97,21 +127,27 @@
                 toggle = false;
 
                 // берём inpyt содержащий текст
-                var inputText = document.querySelector('input[type="text"]');
+                let inputText = document.querySelector('input[type="text"]');
                 // берём inpyt содержащий файл
-                var inputFile = document.querySelector('input[type="file"]');
+                let inputFile = document.querySelector('input[type="file"]');
 
-                var text = inputText.value;
-                var file = inputFile.files[0];
+                let text = inputText.value;
+                let file = inputFile.files[0];
 
 
                 const data = new FormData();
                 data.append("uuid", uuid);
-                data.append("text", text);
-                data.append("files", file);
+                data.append("post_id", changePost_id);
+                if (text){
+                    data.append("text", text);
+                }
+                if (file){
+                    data.append("files", file);
+                }
+
 
                 // оптправляем запрос
-                let response = await fetch('http://' + ip + '/uploadPost', {
+                let response = await fetch('http://' + ip + '/editPost', {
                   method: 'POST',
                   body: data
                 })
@@ -123,6 +159,12 @@
                 }else{
                     toggle = true;
                     console.log("ошибка в создании поста");
+
+                    // преобразовываем запрос в json
+                    let commits = await response.json();
+
+                    // выводим сообщение об ошибке
+                    console.log("error " + commits.err_code + "\n" + commits.err);
                 }
 
             }else{
@@ -130,6 +172,19 @@
             }
         }
 
+
+        // отображение картинки при её загрузке
+        function  resetImg(elem){
+            if (elem.files && elem.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                  document.getElementById('postImage').setAttribute('src', e.target.result);
+                };
+
+                reader.readAsDataURL(elem.files[0]);
+          }
+        }
 
     </script>
 

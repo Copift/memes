@@ -45,12 +45,14 @@
                     <td>
                       <fieldset>
                         <legend align="right"><label for="image">Добавьте картинку</label></legend>
+                        <div> <img id = "postImage" src = "../img/spitsi.png"> </div>
                         <input
                           id="image"
                           name="f"
                           type="file"
                           required
                           size="27"
+                          onChange= resetImg(this)
                         />
                       </fieldset>
                     </td>
@@ -130,6 +132,19 @@
             }
         }
 
+
+        // отображение картинки при её загрузке
+        function  resetImg(elem){
+            if (elem.files && elem.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                  document.getElementById('postImage').setAttribute('src', e.target.result);
+                };
+
+                reader.readAsDataURL(elem.files[0]);
+          }
+        }
 
     </script>
 
