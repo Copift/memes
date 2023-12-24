@@ -49,7 +49,7 @@
 
     <script>
         // ip сервера
-        const ip = '10.8.0.1:5000';
+        const ip = '10.8.0.2:5000';
 
         // персональный id сессии
         var uuid = localStorage.getItem('UUID');
@@ -99,11 +99,25 @@
                 // добавляем пост в html
                 line.insertAdjacentHTML('beforeend',
                                 '<div>'+
+                                // картинка поста
                                 '<div class = "img" id = "' + (PostCount + lastPost) +'_img"></div>' +
+
+                                // данные пользователя
+                                '<div>' +
+                                // аватар пользователя
+                                '<div class = "avatar" id = "' + (PostCount + lastPost) +'_avatar"></div>' +
+                                // имя пользователя
+                                '<div class = "authorName"><p>' + commits.posts[lastPost].user.user_login + '</p></div>' +
+                                '</div>' +
+
+                                // част поста содержащая текст
+                                // текст поста
                                 '<p>' + commits.posts[lastPost].post.Text + '</p>' +
                                 '<div class = "reaction" >' +
+                                // счётчик лайков
                                 '<p id="' + commits.posts[lastPost].post.id + '_like" >' +
                                 commits.posts[lastPost].post.likes + '</p>' +
+                                // кнопка лайка
                                 '<input onclick="useLike(this)" name="scattering" ' +
                                 'value="' + commits.posts[lastPost].post.id + '" ' +
                                 'id="' + (PostCount + lastPost) + '" ' +
@@ -111,22 +125,36 @@
                                 '<label for="' + (PostCount + lastPost) + '" ' +
                                 'class="label_scattering"></label>'+
                                 '</div>' +
-                                '<button onclick="deletePost(this)" '+
+
+                                // часть поста связанная с управлением своими постами
+                                // кнопка восстановления поста
+                                '<button onclick="revivePost(this)" '+
                                 'value="' + commits.posts[lastPost].post.id + '" ' +
                                 'id="' + (PostCount + lastPost) + '" ' +
-                                '> востановление поста </button>' +
+                                '> восстановление поста </button>' +
                                 '</div>'
+
                                );
 
+                // Добывление картинки
                 // создаем пустую картинку
                 var img = new Image();
 
                 // добавляем картинке ссылку на изображение
-                img.src = '' + commits.posts[lastPost].post.image_link + '';
+                img.src = commits.posts[lastPost].post.image_link;
 
                 // здесь добавляем готовую картинку в html
                 document.getElementById((PostCount + lastPost) +'_img').appendChild(img);
 
+                // Добывление аватара
+                // создаем пустую картинку
+                var avatar = new Image();
+
+                // добавляем картинке ссылку на изображение
+                avatar.src = commits.posts[lastPost].user.avatarLink;
+
+                // здесь добавляем готовую картинку в html
+                document.getElementById((PostCount + lastPost) +'_avatar').appendChild(avatar);
 
                 // БЫСТРЫЙ НО НЕ КРАСИВЫЙ СПОСОБ СОЗДАТЬ ЛЕНТУ
                 addPosts(commits, lastPost+1);
@@ -176,7 +204,7 @@
 
 
         // функция восстановления поста из общей ленты
-        async function deletePost(elem){
+        async function revivePost(elem){
             console.log("попытка восстановления поста" + elem.value);
 
             // оптправляем запрос
@@ -189,6 +217,12 @@
             }else{
                 toggle = true;
                 console.log("ошибка в восстановления поста");
+
+                // преобразовываем запрос в json
+                let commits = await response.json();
+
+                // выводим сообщение об ошибке
+                console.log("error " + commits.err_code + "\n" + commits.err);
             }
         }
 

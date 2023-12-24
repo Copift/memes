@@ -58,14 +58,14 @@
 
     <script>
         // ip сервера
-        const ip = '10.8.0.1:5000';
+        const ip = '10.8.0.2:5000';
 
         // персональный id сессии
         var uuid = localStorage.getItem('UUID');
         //var uuid = '0ee09b12-af98-49ad-a3dc-9b8cbc186ad5';  // ДОЛЖЕН ПОЛУЧАТЬСЯ ПРИ АВТОРИЗАЦИИ
 
         // является ли пользователь админом
-        var is_admin = localStorage.getItem('IS_ADMIN');
+        var is_admin = (localStorage.getItem('IS_ADMIN') == "true" );
 
         // количество постов в ленте
         var PostCount = 0;
@@ -87,6 +87,8 @@
                 //  если у пользователя нет uuid пересылаем его к авторизации
                 window.location.replace("avt.html");
             }
+
+            console.log(is_admin);
         }
 
 
@@ -116,10 +118,10 @@
 
                                 // данные пользователя
                                 '<div>' +
-                                // имя пользователя
-                                '<p>' + '</p>' +
                                 // аватар пользователя
                                 '<div class = "avatar" id = "' + (PostCount + lastPost) +'_avatar"></div>' +
+                                // имя пользователя
+                                '<div class = "authorName"><p>' + commits.posts[lastPost].user.user_login + '</p></div>' +
                                 '</div>' +
 
                                 // част поста содержащая текст
@@ -147,15 +149,25 @@
                                 '</div>'
                                );
 
+                // Добывление картинки
                 // создаем пустую картинку
                 var img = new Image();
 
                 // добавляем картинке ссылку на изображение
-                img.src = '' + commits.posts[lastPost].post.image_link + '';
+                img.src = commits.posts[lastPost].post.image_link;
 
                 // здесь добавляем готовую картинку в html
                 document.getElementById((PostCount + lastPost) +'_img').appendChild(img);
 
+                // Добывление аватара
+                // создаем пустую картинку
+                var avatar = new Image();
+
+                // добавляем картинке ссылку на изображение
+                avatar.src = commits.posts[lastPost].user.avatarLink;
+
+                // здесь добавляем готовую картинку в html
+                document.getElementById((PostCount + lastPost) +'_avatar').appendChild(avatar);
 
                 // БЫСТРЫЙ НО НЕ КРАСИВЫЙ СПОСОБ СОЗДАТЬ ЛЕНТУ
                 addPosts(commits, lastPost+1);
