@@ -98,39 +98,43 @@
                 // отключаем возможность отылать пост
                 toggle = false;
 
-                // берём inpyt содержащий текст
+                // берём в input содержащий текст
                 var inputText = document.querySelector('input[type="text"]');
-                // берём inpyt содержащий файл
+                // берём в input содержащий файл
                 var inputFile = document.querySelector('input[type="file"]');
 
                 var text = inputText.value;
                 var file = inputFile.files[0];
 
+                if (text && file){
+                    const data = new FormData();
+                    data.append("uuid", uuid);
+                    data.append("text", text);
+                    data.append("files", file);
 
-                const data = new FormData();
-                data.append("uuid", uuid);
-                data.append("text", text);
-                data.append("files", file);
+                    // оптправляем запрос
+                    let response = await fetch('http://' + ip + '/uploadPost', {
+                      method: 'POST',
+                      body: data
+                    })
 
-                // оптправляем запрос
-                let response = await fetch('http://' + ip + '/uploadPost', {
-                  method: 'POST',
-                  body: data
-                })
+                    // если прищёл правильный ответ
+                    if (response.ok){
+                        toggle = true;
+                        console.log("пост создан");
+                    }else{
+                        toggle = true;
+                        console.log("ошибка в создании поста");
 
-                // если прищёл правильный ответ
-                if (response.ok){
-                    toggle = true;
-                    console.log("пост создан");
+                        // преобразовываем запрос в json
+                        let commits = await response.json();
+
+                        // выводим сообщение об ошибке
+                        console.log("error " + commits.err_code + "\n" + commits.err);
+                    }
                 }else{
                     toggle = true;
-                    console.log("ошибка в создании поста");
-
-                    // преобразовываем запрос в json
-                    let commits = await response.json();
-
-                    // выводим сообщение об ошибке
-                    console.log("error " + commits.err_code + "\n" + commits.err);
+                    alert("ошибка в заполнении формы");
                 }
 
             }else{

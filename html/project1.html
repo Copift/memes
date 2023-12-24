@@ -12,8 +12,9 @@
 </header>
 <body>
     <div class="left-column">
-        <div class = "personal">User-1
-            <img src="../img/icon.svg">
+        <div id = "UserData" class = "personal">
+
+            <img id = "UserAvatar" src="../img/icon.svg">
         </div>
         <a href="./blog.html"> <div class = "black">Мой блог</div></a>
         <div>Комментарии</div>
@@ -81,14 +82,43 @@
         function startPostsLine(){
             // проверякм у пользователя наличее uuid
             if (uuid){
+                // Загружаем данные пользователя
+                // создаём запрос
+                //let url = 'http://' + ip + '/me?uuid=' + uuid;
+                let url = 'http://' + ip + '/me?uuid=78f51a62-05d4-473f-85f8-b566e21d4c44';
+
+                // принимаем и обрабатываем данные запроса
+                fetch(url)
+                    .then(response => response.json())    // преобразовавем запрос в json
+                    .then(commits => addUserInfo(commits));  // передаем json в функцию создания поста
+
+
                 // получаем посты из БД и добавляем их в ленту
                 takePosts();
             }else{
                 //  если у пользователя нет uuid пересылаем его к авторизации
                 window.location.replace("avt.html");
             }
+        }
 
-            console.log(is_admin);
+
+        // устанавливаем имя пользователя и его аватар
+        function addUserInfo(commits){
+            console.log(commits);
+
+            // устанавливаем аватар пользователя
+            // создаем пустую картинку
+            var img = new Image();
+
+            // добавляем картинке ссылку на изображение
+            img.src = commits.user_img;
+
+            // здесь добавляем готовую картинку в html
+            document.getElementById("UserData").appendChild(img);
+
+            // устанавливаем имя пользователя
+            document.getElementById("UserData").insertAdjacentHTML('beforeend',
+                                                          '<p>' + commits.user_name + '</p>');
         }
 
 

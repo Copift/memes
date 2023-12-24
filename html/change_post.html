@@ -112,8 +112,6 @@
             //console.log(commits);
             document.getElementById("comment").setAttribute("value", commits.text);
             document.getElementById("postImage").setAttribute("src", commits.image_link);
-
-
         }
 
 
@@ -126,9 +124,9 @@
                 // отключаем возможность отылать пост
                 toggle = false;
 
-                // берём inpyt содержащий текст
+                // берём в input содержащий текст
                 let inputText = document.querySelector('input[type="text"]');
-                // берём inpyt содержащий файл
+                // берём в input содержащий файл
                 let inputFile = document.querySelector('input[type="file"]');
 
                 let text = inputText.value;
