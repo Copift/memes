@@ -59,7 +59,7 @@
 
     <script>
         // ip сервера
-        const ip = '10.8.0.2:5000';
+        const ip = '10.8.0.1:5000';
 
         // персональный id сессии
         var uuid = localStorage.getItem('UUID');
@@ -83,43 +83,47 @@
             // проверякм у пользователя наличее uuid
             if (uuid){
                 // Загружаем данные пользователя
-                // создаём запрос
-                //let url = 'http://' + ip + '/me?uuid=' + uuid;
-                let url = 'http://' + ip + '/me?uuid=78f51a62-05d4-473f-85f8-b566e21d4c44';
+                takeUserInfo();
 
-                // принимаем и обрабатываем данные запроса
-                fetch(url)
-                    .then(response => response.json())    // преобразовавем запрос в json
-                    .then(commits => addUserInfo(commits));  // передаем json в функцию создания поста
-
-
-                // получаем посты из БД и добавляем их в ленту
-                takePosts();
             }else{
                 //  если у пользователя нет uuid пересылаем его к авторизации
                 window.location.replace("avt.html");
             }
         }
 
-
         // устанавливаем имя пользователя и его аватар
-        function addUserInfo(commits){
-            console.log(commits);
+        function takeUserInfo(commits){
+            // создаём запрос
+            let url = 'http://' + ip + '/me?uuid=' + uuid;
 
+            // принимаем и обрабатываем данные запроса
+            fetch(url)
+                .then(response => response.json())    // преобразовавем запрос в json
+                .then(commits => addUserInfo(commits));  // передаем json в функцию создания поста
+        }
+
+        function addUserInfo(commits){
             // устанавливаем аватар пользователя
             // создаем пустую картинку
             var img = new Image();
+
+            // когда картинка загружена, начинаем загрузку другой
+            img.onload = function(){
+                // получаем посты из БД и добавляем их в ленту
+                takePosts();
+            };
 
             // добавляем картинке ссылку на изображение
             img.src = commits.user_img;
 
             // здесь добавляем готовую картинку в html
-            document.getElementById("UserData").appendChild(img);
+            document.getElementById('UserData').appendChild(img);
 
             // устанавливаем имя пользователя
             document.getElementById("UserData").insertAdjacentHTML('beforeend',
                                                           '<p>' + commits.user_name + '</p>');
         }
+
 
 
         // отправляет запрос в БД и принимает его
@@ -249,8 +253,8 @@
         function moderatPart(num, user_id, post_id){
             if (is_admin){
                 return         ( // кнопка бана пользователя
-                                '<button onclick="UserBan(this)" '+
-                                'value="' + user_id + '" ' +
+                                '<button onclick="UserBan(this)"'+
+                                ' value="' + user_id + '" ' +
                                 'id="' + num + '" ' +
                                 '> бан пользователя </button>' +
                                 // кнопка бана поста
@@ -275,6 +279,7 @@
             if (response.ok){
                 toggle = true;
                 console.log("пользователь забанен");
+                location.reload();
             }else{
                 toggle = true;
                 console.log("ошибка в бане пользователя");
@@ -293,6 +298,7 @@
             if (response.ok){
                 toggle = true;
                 console.log("пост забанен");
+                location.reload();
             }else{
                 toggle = true;
                 console.log("ошибка в бане поста");

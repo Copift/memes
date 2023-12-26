@@ -70,7 +70,7 @@
 </body>
     <script>
         // ip сервера
-        const ip = '10.8.0.2:5000';
+        const ip = '10.8.0.1:5000';
 
         // персональный id сессии
         var uuid = localStorage.getItem('UUID');
@@ -120,6 +120,7 @@
             // проверяем переключатель
             if (toggle){
                 console.log("отправка запроса");
+                alert("отправка запроса");
 
                 // отключаем возможность отылать пост
                 toggle = false;
@@ -153,10 +154,14 @@
                 // если прищёл правильный ответ
                 if (response.ok){
                     toggle = true;
-                    console.log("пост создан");
+                    console.log("пост изменён");
+
+                    // переходим в блог
+                    document.location='./blog.html';
                 }else{
                     toggle = true;
-                    console.log("ошибка в создании поста");
+                    console.log("ошибка в изменении поста");
+                    alert("ошибка в изменении поста");
 
                     // преобразовываем запрос в json
                     let commits = await response.json();

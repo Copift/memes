@@ -49,7 +49,7 @@
 
     <script>
         // ip сервера
-        const ip = '10.8.0.2:5000';
+        const ip = '10.8.0.1:5000';
 
         // персональный id сессии
         var uuid = localStorage.getItem('UUID');
@@ -214,6 +214,7 @@
             if (response.ok){
                 toggle = true;
                 console.log("пост восстановлен");
+                location.reload();
             }else{
                 toggle = true;
                 console.log("ошибка в восстановления поста");

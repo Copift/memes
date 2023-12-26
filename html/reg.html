@@ -137,7 +137,7 @@
 
       <script>
         // ip сервера
-        const ip = '10.8.0.2:5000';
+        const ip = '10.8.0.1:5000';
 
         // переключатель, для ограничения нажатия на кнопку
         var toggle = true;
@@ -148,6 +148,7 @@
         async function sendNewUsrerInfo(){
             // проверяем переключатель
             if (toggle){
+
                 // временно отключаем возможность отылать запрос
                 toggle = false;
 
@@ -166,6 +167,7 @@
                 // проверяем заполнение всех полей
                 if (name && surname && login && birthDate && password && (password == passwordRe)){
                     console.log("отправка запроса");
+                    alert("отправка запроса");
 
                     // объединяем данные для отправления
                     const data = new FormData();
@@ -191,6 +193,7 @@
                         console.log("юзер создан");
                     }else{
                         toggle = true;
+                        alert("ошибка в создании юзера");
                         console.log("ошибка в создании юзера");
 
                         // преобразовываем запрос в json
