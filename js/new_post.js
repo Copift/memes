@@ -1,5 +1,5 @@
 // ip сервера
-const ip = '10.8.0.1:5000';
+const ip = 'copift.ru:5000';
 
 // персональный id сессии
 var uuid = localStorage.getItem('UUID');

@@ -1,5 +1,5 @@
 // ip сервера
-const ip = '10.8.0.1:5000';
+const ip = 'copift.ru:5000';
 
 function auth(){
     var login = document.getElementsByTagName("input")[0];
