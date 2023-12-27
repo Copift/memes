@@ -94,7 +94,7 @@ async function sendNewUsrerInfo(){
                 console.log("данные пользователя изменены");
 
                 // переходим в блог
-                //document.location='./blog.html';
+                document.location='./blog.html';
             }else{
                 toggle = true;
                 alert("ошибка в изменении данных пользователя");
