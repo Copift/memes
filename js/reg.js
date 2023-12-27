@@ -26,50 +26,57 @@ async function sendNewUsrerInfo(){
         let password  = document.getElementById('password').value;
         let passwordRe = document.getElementById('passwordRe').value;
 
-        // проверяем заполнение всех полей
-        if (name && surname && login && birthDate && password && (password == passwordRe)){
-            console.log("отправка запроса");
-            alert("отправка запроса");
+        var format = /^[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/;
 
-            // объединяем данные для отправления
-            const data = new FormData();
+        // провека наличия спецсимволов в полях регистрации
+        if( name.match(format), surname.match(format), login.match(format)){
+            toggle = true;
+            alert("нельзя использовать спец символы в формер регистрации");
+        }else{
+            // проверяем заполнение всех полей
+            if (name && surname && login && birthDate && password && (password == passwordRe)){
+                console.log("отправка запроса");
+                alert("отправка запроса");
 
-            data.append("user_login", login);
-            data.append("user_passwd", password);
-            data.append("user_name", name);
-            data.append("user_surname", surname);
-            data.append("date_of_birth", birthDate);
+                // объединяем данные для отправления
+                const data = new FormData();
 
-            data.append("files", file);
+                data.append("user_login", login);
+                data.append("user_passwd", password);
+                data.append("user_name", name);
+                data.append("user_surname", surname);
+                data.append("date_of_birth", birthDate);
+
+                data.append("files", file);
 
 
-            // оптправляем запрос
-            let response = await fetch('http://' + ip + '/addUser', {
-              method: 'POST',
-              body: data
-            })
+                // оптправляем запрос
+                let response = await fetch('http://' + ip + '/addUser', {
+                  method: 'POST',
+                  body: data
+                })
 
-            // если прищёл правильный ответ
-            if (response.ok){
-                toggle = true;
-                console.log("юзер создан");
+                // если прищёл правильный ответ
+                if (response.ok){
+                    toggle = true;
+                    console.log("юзер создан");
+                }else{
+                    toggle = true;
+                    alert("ошибка в создании юзера");
+                    console.log("ошибка в создании юзера");
+
+                    // преобразовываем запрос в json
+                    let commits = await response.json();
+
+                    // выводим сообщение об ошибке
+                    console.log("error " + commits.err_code + "\n" + commits.err);
+                }
+
             }else{
                 toggle = true;
-                alert("ошибка в создании юзера");
-                console.log("ошибка в создании юзера");
-
-                // преобразовываем запрос в json
-                let commits = await response.json();
-
-                // выводим сообщение об ошибке
-                console.log("error " + commits.err_code + "\n" + commits.err);
+                alert("ошибка в заполнении формы");
             }
-
-        }else{
-            toggle = true;
-            alert("ошибка в заполнении формы");
         }
-
     }else{
         alert("подождите, предидущий запрос ещё не отправился");
     }
