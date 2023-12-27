@@ -62,7 +62,7 @@ function addPosts(commits, lastPost = 0){
 
                         // част поста содержащая текст
                         // текст поста
-                        '<p>' + commits.posts[lastPost].post.Text + '</p>' +
+                        '<p id="' + commits.posts[lastPost].post.id + '_text" >' + "" + '</p>' +
                         '<div class = "reaction" >' +
                         // счётчик лайков
                         '<p id="' + commits.posts[lastPost].post.id + '_like" >' +
@@ -85,6 +85,13 @@ function addPosts(commits, lastPost = 0){
                         '</div>'
 
                        );
+
+        // Добавление текст
+        let textLine = document.getElementById(commits.posts[lastPost].post.id + "_text");
+
+        // добавляем пост в html
+        textLine.innerText = "" + commits.posts[lastPost].post.Text;
+
 
         // Добывление картинки
         // создаем пустую картинку
