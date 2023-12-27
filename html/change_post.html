@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../css/main.css" rel="stylesheet" type="text/css" />
     <link href="../css/new_post.css" rel="stylesheet" type="text/css" />
     <title>Document</title>
 </head>
+<body>
     <header>Не-спица
         <img src="../img/spitsi.png" />
     </header>
     <body>
         <div class="left-column">
-            <div class = "personal">User-1
-                <img src="../img/icon.svg">
-            </div>
             <a href="./blog.html"> <div class = "black">Мой блог</div></a>
             <div>Комментарии</div>
             <div class = "black">Добавить фандом</div>
@@ -29,14 +28,13 @@
                     <td>
                       <fieldset>
                         <legend align="right"><label for="comment">Подпись</label></legend>
-                        <input
+                        <textarea
                           id="comment"
                           name="comment"
                           type="text"
                           class="text"
                           required
-                          size="27"
-                        />
+                          size="27"></textarea>
                       </fieldset>
                     </td>
                   </tr>
@@ -60,13 +58,12 @@
               </form>
               <button onclick="sendChangedPost()" class="return">Заменить</button>
         </div>
-
-    <script src="../js/change_post.js"></script>
-  </body>
-
+    </body>
     <footer>
         <div>Политика конфиденциальности</div>
         <div>Пользовательское соглашение</div>
         <div>CC-BY</div>
     </footer>
+</body>
+<script src="../js/change_post.js"></script>
 </html>

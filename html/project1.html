@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="ru">
-<link href="../css/project1.css" rel="stylesheet" type="text/css" />
+    <link href="../css/project1.css" rel="stylesheet" type="text/css" />
+    <link href="../css/lenta.css" rel="stylesheet" type="text/css" />
+    <link href="../css/main.css" rel="stylesheet" type="text/css" />
+    <link href="../css/personal.css" rel="stylesheet" type="text/css" />
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,9 +15,10 @@
 </header>
 <body>
     <div class="left-column">
-        <div id = "UserData" class = "personal">
-
-            <img id = "UserAvatar" src="../img/icon.svg">
+        <div class = "personaldiv">
+            <div id = "UserData" class = "personal">
+                <img id = "UserAvatar" src="../img/icon.svg">
+            </div>
         </div>
         <a href="./blog.html"> <div class = "black">Мой блог</div></a>
         <div>Комментарии</div>
@@ -29,15 +33,13 @@
 
 
         </span>
-
+        <div class="helping"></div>
     </div>
 
 
     <div class="right-column">
         <!-- кнопка добавления постов-->
-        <div class="button_container">
-            <button onclick="takePosts()"> Ищем! </button>
-        </div>
+        <button onclick="takePosts()" class = "find"> Ищем! </button>
         <img class = "one" src="../img/vereteno.svg">
         <img class = "wheel" src="../img/wheel.svg">
             <select>
@@ -49,13 +51,12 @@
 
         <button class = "new" onclick="document.location='./new_post.html'">Новый пост</button>
     </div>
-    <footer>
+</body>
+<footer>
     <img src = "../img/bottom.svg">
     <div>Политика конфиденциальности</div>
     <div>Пользовательское соглашение</div>
     <div>CC-BY</div>
-    </footer>
-
-    <script src="../js/project1.js"></script>
-  </body>
+</footer>
+<script src="../js/project1.js"></script>
 </html>

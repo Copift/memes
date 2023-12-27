@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="ru">
-<link href="../css/blog.css" rel="stylesheet" type="text/css" />
+    <link href="../css/lenta.css" rel="stylesheet" type="text/css" />
+    <link href="../css/main.css" rel="stylesheet" type="text/css" />
+    <link href="../css/blog.css" rel="stylesheet" type="text/css" />
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,11 +14,13 @@
 </header>
 <body>
     <div class="left-column">
-        <button onclick="document.location='./project1.html'" class="return">Вернуться на главную</button>
-        <div class = "black">Комментарии</div>
-        <div>Подписки</div>
-        <div class = "black">Сохраненное</div>
-        <div>Частые вопросы</div>
+            <div class="personaldiv">
+                <button onclick="document.location='./project1.html'" class="return">Вернуться на главную</button>
+            </div>
+            <div>Комментарии</div>
+            <div class = "black">Подписки</div>
+            <div>Сохраненное</div>
+            <div class = "black">Частые вопросы</div>
     </div>
         <!-- Часть, куда будут добавляться посты -->
         <div class="center-column">
@@ -26,26 +30,25 @@
 
 
             </span>
+            <div class="helping"></div>
     </div>
     <div class="right-column">
         <div class="black">Мои читатели</div>
         <div>Подписки</div>
         <div class="black">Статистика</div>
-        <div>Изменить профиль</div>
+        <a href="change_your_information.html"><div>Изменить профиль</div></a>
         <div class="black">Выйти</div>
                 <!-- кнопка добавления постов-->
                 <div class="button_container">
                     <button onclick="takeUserPosts()"> Показать ещё посты </button>
                 </div>
-    </div>
-
-    <script src="../js/blog.js"></script>
-  </body>
-
-    <footer>
-        <img src="../img/bottom.svg">
-        <div>Политика конфиденциальности</div>
-        <div>Пользовательское соглашение</div>
-        <div>CC-BY</div>
-    </footer>
+        </div>
+</body>
+<footer>
+    <img src="../img/bottom.svg">
+    <div>Политика конфиденциальности</div>
+    <div>Пользовательское соглашение</div>
+    <div>CC-BY</div>
+</footer>
+<script src="../js/blog.js"></script>
 </html>

@@ -10,7 +10,6 @@
       Рады вас видеть!
     </h1>
     <hr />
-    <form action="" method="post">
       <table align="center">
         <tr>
           <td>
@@ -22,7 +21,7 @@
                 type="text"
                 class="text"
                 required
-                placeholder="Имя"
+                maxlength="40"
                 size="27"
               />
             </fieldset>
@@ -38,8 +37,9 @@
                 id="surname"
                 name="email"
                 type="text"
-                class="text"placeholder="Фамилия"
+                class="text"
                 required
+                maxlength="40"
                 size="27"
               />
             </fieldset>
@@ -49,7 +49,7 @@
           <td>
             <fieldset>
               <legend align="right">
-                <label for="login">логин</label>
+                <label for="login">Логин</label>
               </legend>
               <input
               id="login"
@@ -57,7 +57,7 @@
               type="text"
               class="text"
               size="27"
-              placeholder="логин"
+              maxlength="40"
               />
             </fieldset>
           </td>
@@ -101,7 +101,7 @@
               id="password"
               type="password"
               required
-              maxlength="15"
+              maxlength="40"
               size="27"
               name="password"
               class = "text"
@@ -120,7 +120,7 @@
             <input
               id="passwordRe"
               type="password"
-              maxlength="15"
+              maxlength="40"
               size="27"
               name="password"
               class = "text"
@@ -129,11 +129,10 @@
           </fieldset>
         </td>
       </tr>
-
       </table>
-    </form>
-    <button onclick="sendNewUsrerInfo()" class="return">Зарегистрироваться</button>
-
-    <script src="../js/reg.js"></script>
+    <div class = "buttondiv">
+      <button onclick="sendNewUsrerInfo()" class="return">Зарегистрироваться</button>
+    </div>
   </body>
+  <script src="../js/reg.js"></script>
 </html>

@@ -10,7 +10,6 @@
       Авторизация
     </h1>
     <hr />
-    <form action="" method="post">
       <table align="center">
         <tr>
           <td>
@@ -22,7 +21,8 @@
                 type="text"
                 class="text"
                 required
-                size="27"
+                maxlength="40"
+                size="30"
               />
             </fieldset>
           </td>
@@ -37,8 +37,8 @@
               id="pass"
               type="password"
               required
-              maxlength="15"
-              size="27"
+              maxlength="40"
+              size="30"
               name="password"
               class = "text"
             />
@@ -46,9 +46,9 @@
           </td>
         </tr>
       </table>
-    </form>
-    <button onclick="auth()" class="return">Войти</button>
-
-      <script src="../js/avt.js"></script>
+    <div class = "buttondiv"><button onclick="auth()" class="return">Войти</button></div>
+    <a href="./reg.html"><div class = "reg" >Хочу зарегистрироваться</div></a>
   </body>
+
+  <script src="../js/avt.js"></script>
 </html>

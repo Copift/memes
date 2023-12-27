@@ -22,19 +22,19 @@ function startPostsLine(){
 async function sendPost(){
     // проверяем переключатель
     if (toggle){
-        console.log("отправка запроса");
-        alert("отправка запроса");
+        console.log("отправка запроса 12345");
+        alert("отправка запроса 12345");
 
         // отключаем возможность отылать пост
         toggle = false;
 
         // берём в input содержащий текст
-        var inputText = document.querySelector('input[type="text"]');
+        let inputText = document.getElementById("comment");
         // берём в input содержащий файл
-        var inputFile = document.querySelector('input[type="file"]');
+        let inputFile = document.querySelector('input[type="file"]');
 
-        var text = inputText.value;
-        var file = inputFile.files[0];
+        let text = inputText.value;
+        let file = inputFile.files[0];
 
         if (text && file){
             const data = new FormData();

@@ -39,7 +39,8 @@ function startPostChange(){
 // добавить данные поста в редактор
 function addInfo(commits){
     //console.log(commits);
-    document.getElementById("comment").setAttribute("value", commits.text);
+    document.getElementById("comment").value += commits.text;
+    console.log(commits.text);
     document.getElementById("postImage").setAttribute("src", commits.image_link);
 }
 
@@ -55,7 +56,7 @@ async function sendChangedPost(){
         toggle = false;
 
         // берём в input содержащий текст
-        let inputText = document.querySelector('input[type="text"]');
+        let inputText = document.getElementById("comment");
         // берём в input содержащий файл
         let inputFile = document.querySelector('input[type="file"]');
 
