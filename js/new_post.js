@@ -22,8 +22,8 @@ function startPostsLine(){
 async function sendPost(){
     // проверяем переключатель
     if (toggle){
-        console.log("отправка запроса 12345");
-        alert("отправка запроса 12345");
+        console.log("отправка запроса");
+        alert("отправка запроса");
 
         // отключаем возможность отылать пост
         toggle = false;
