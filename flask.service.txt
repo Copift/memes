@@ -1,0 +1,14 @@
+
+        [Unit]
+        Description=My Flask Application
+        After=network.target
+
+        [Service]
+        User=yourusername
+        Group=www-data
+        WorkingDirectory=/path/to/your/app
+        ExecStart=/usr/bin/python3 /var/www/html/memes/main.py
+        Restart=always
+
+        [Install]
+        WantedBy=multi-user.target

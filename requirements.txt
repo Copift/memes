@@ -1,0 +1,8 @@
+json
+requests
+mysql-connector python
+flask
+flask-cors
+flask-json
+hashlib
+uuid
